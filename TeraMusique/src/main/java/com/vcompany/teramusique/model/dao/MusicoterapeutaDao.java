@@ -4,10 +4,12 @@
  */
 package com.vcompany.teramusique.model.dao;
 
+import com.vcompany.teramusique.model.dao.contracts.Dao;
 import com.vcompany.teramusique.connection.DatabaseJPA;
 import com.vcompany.teramusique.exceptions.MusicoterapeutaException;
 import com.vcompany.teramusique.model.Musicoterapeuta;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -55,4 +57,37 @@ public class MusicoterapeutaDao extends Dao<Musicoterapeuta> {
         }
 
     }
+    
+    public List<Musicoterapeuta> filterByName(String nome){
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        
+        String jpql = " SELECT m "
+                + " FROM Musicoterapeuta m "
+                + " WHERE m.nome LIKE :nome ";
+        TypedQuery qry = this.entityManager.createQuery(jpql, Musicoterapeuta.class);
+        qry.setParameter("nome", nome);
+        
+        List<Musicoterapeuta> lst = qry.getResultList();
+        this.entityManager.close();
+        
+       return lst;
+        
+    }
+    
+    public List<Musicoterapeuta> filterByEspecializacao(String especializacao){
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        
+        String jpql = " SELECT m "
+                + " FROM Musicoterapeuta m "
+                + " WHERE m.especializacao LIKE :especializacao";
+        TypedQuery qry = this.entityManager.createQuery(jpql, Musicoterapeuta.class);
+        qry.setParameter("especializacao", especializacao);
+        
+        List<Musicoterapeuta> lst = qry.getResultList();
+        this.entityManager.close();
+        
+       return lst;
+        
+    }
+    
 }

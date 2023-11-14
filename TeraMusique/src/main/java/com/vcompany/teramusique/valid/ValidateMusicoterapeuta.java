@@ -5,7 +5,10 @@
 package com.vcompany.teramusique.valid;
 
 import com.vcompany.teramusique.exceptions.MusicoterapeutaException;
+import com.vcompany.teramusique.exceptions.MusicoterapeutaException;
 import com.vcompany.teramusique.model.Musicoterapeuta;
+import com.vcompany.teramusique.view.FrCadMusicoterapeuta;
+import com.vcompany.teramusique.view.popups.DlgPopUpCampoVazio;
 
 /**
  *
@@ -13,29 +16,77 @@ import com.vcompany.teramusique.model.Musicoterapeuta;
  */
 public class ValidateMusicoterapeuta {
 
+    FrCadMusicoterapeuta frMusicoterapeutaParent;
+
     public Musicoterapeuta validaCamposEntrada(Musicoterapeuta validaMusicoterapeuta) {
         Musicoterapeuta m = new Musicoterapeuta();
+        
+        if (validaMusicoterapeuta.getNome().isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Campo 'Nome' vazio");
+        }
 
-        m.setId(validaMusicoterapeuta.getId());
+        m.setNome(validaMusicoterapeuta.getNome());
 
-        if (validaMusicoterapeuta.getQualificacoes().isEmpty()) {
-            throw new MusicoterapeutaException("Error - Campo vazio: 'Qualificacoes'. ");
+        if (validaMusicoterapeuta.getSexo().isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Informe seu sexo.");
+        }
+
+        m.setSexo(validaMusicoterapeuta.getSexo());
+
+        if (validaMusicoterapeuta.getIdade() < 0) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Idade não permitida.");
+        }
+        
+        if (String.valueOf(validaMusicoterapeuta.getIdade()).isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Campo 'idade' vazio.");
+        }
+        
+        m.setIdade(validaMusicoterapeuta.getIdade());
+
+        if (validaMusicoterapeuta.getTelefone().isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Campo 'Telefone' vazio.");
+        }
+
+        m.setTelefone(validaMusicoterapeuta.getTelefone());
+
+        if (validaMusicoterapeuta.getSexo() == null) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Preencha o campo 'Toma medicação?'.");
+        }
+        
+        
+
+        if (validaMusicoterapeuta.getQualificacoes() == null) {
+            DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Insira suas qualificações.");
         }
 
         m.setQualificacoes(validaMusicoterapeuta.getQualificacoes());
 
         if (validaMusicoterapeuta.getEspecializacao().isEmpty()) {
-            throw new MusicoterapeutaException("Error - Campo vazio: 'Especializacao'. ");
+            DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Insira suas especializacoes.");
         }
 
         m.setEspecializacao(validaMusicoterapeuta.getEspecializacao());
 
-        if (validaMusicoterapeuta.getLstSessoes().isEmpty()) {
-            throw new MusicoterapeutaException("Error - Campo vazio: 'Lista de sessoes'. ");
-        }
 
         m.setLstSessoes(validaMusicoterapeuta.getLstSessoes());
+
+        if (validaMusicoterapeuta.getEmail().isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Campo de email vazio.");
+        }
         
+        m.setEmail(validaMusicoterapeuta.getEmail());
+        
+        if (validaMusicoterapeuta.getSenha().isEmpty()) {
+            new DlgPopUpCampoVazio(frMusicoterapeutaParent, true, "Erro: Defina uma senha para seu login.");
+        }
+        
+        m.setSenha(validaMusicoterapeuta.getSenha());
+        
+        if (validaMusicoterapeuta.getNivelAcesso() < 0) {
+                throw new MusicoterapeutaException("Musicoterapeuta com nível de acesso negativo.");
+        }
+        
+        m.setNivelAcesso(validaMusicoterapeuta.getNivelAcesso());
         return m;
     }
 }

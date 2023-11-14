@@ -11,7 +11,7 @@ import com.vcompany.teramusique.model.Musica;
  *
  * @author vitor
  */
-public class ValidadeMusica {
+public class ValidateMusica {
  
      public Musica validaCamposEntrada(Musica validaMusica) {
         Musica m = new Musica();

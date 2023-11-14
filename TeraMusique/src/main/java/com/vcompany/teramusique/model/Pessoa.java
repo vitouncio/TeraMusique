@@ -1,5 +1,6 @@
 package com.vcompany.teramusique.model;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,22 +20,34 @@ public class Pessoa {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String nome;
-    private String sexo;
-    private Integer idade;
-    private String telefone;
+    protected Integer id;
+    protected String nome;
+    protected String sexo;
+    protected Integer idade;
+    protected String telefone;
+    protected String email;
+    protected String senha;
+    protected Integer nivelAcesso;
+    
 
     public Pessoa() {
-        this.nome = "";
+        this.id = 0;
+        this.nome = "gustavo";
         this.sexo = "";
         this.idade = 0;
         this.telefone = "";
+        this.email = "";
+        this.senha = "";
+        this.nivelAcesso = -1;
     }
 
-    public Pessoa(String nome, String sexo, Integer idade, String telefone) {
+    public Pessoa(String nome, String sexo, Integer idade, String telefone, String email, String senha, Integer nivelAcesso) {
         this.nome = nome;
         this.sexo = sexo;
         this.idade = idade;
         this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
     }
 }

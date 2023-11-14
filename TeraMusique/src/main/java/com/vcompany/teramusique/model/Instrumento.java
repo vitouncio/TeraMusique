@@ -48,4 +48,17 @@ public class Instrumento {
         this.descricao = descricao;
         this.quantDisponivel = quantDisponivel;
     }
+
+    @Override
+    public String toString() {
+        String txt = "---- Dados do Instrumento ------\n"
+                + "id: " + this.id + "\n"
+                + super.toString()
+                + " Nome: " + this.nome + "\n"
+                + " Descricao: " + this.descricao + "\n"
+                + "-------------------------------------\n";
+
+        return txt;
+    }
+    
 }

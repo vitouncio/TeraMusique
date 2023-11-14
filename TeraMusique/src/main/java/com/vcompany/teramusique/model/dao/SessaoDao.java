@@ -4,10 +4,13 @@
  */
 package com.vcompany.teramusique.model.dao;
 
+import com.vcompany.teramusique.model.dao.contracts.Dao;
 import com.vcompany.teramusique.connection.DatabaseJPA;
 import com.vcompany.teramusique.exceptions.SessaoException;
+import com.vcompany.teramusique.model.Musicoterapeuta;
 import com.vcompany.teramusique.model.Sessao;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -37,19 +40,58 @@ public class SessaoDao extends Dao<Sessao> {
 
             jpql = " SELECT s "
                     + " FROM Sessao s ";
-            
+
             qry = super.entityManager.createQuery(jpql, Sessao.class);
-            
+
             List lst = qry.getResultList();
             return lst;
-            
+
         } catch (SessaoException e) {
 
-            throw new SessaoException("Erro: Lista não encontrada."); 
+            throw new SessaoException("Erro: Lista não encontrada.");
 
         } finally {
             super.entityManager.close();
         }
+    }
+
+    public Sessao filterByData(String data) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+        String jpql = " SELECT s "
+                + " FROM Sessao s "
+                + " WHERE s.data LIKE :data ";
+        TypedQuery qry = this.entityManager.createQuery(jpql, Sessao.class);
+        qry.setParameter("data", data);
+
+        List<Sessao> lst = qry.getResultList();
+        this.entityManager.close();
+
+        if (lst.isEmpty()) {
+            return null;
+        } else {
+            return lst.get(0);
+        }
+    }
+
+    public Sessao filterByMusicoterapeutaResp(Musicoterapeuta musicoterapeutaResp) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+        String jpql = " SELECT m "
+                + " FROM Sessao m "
+                + " WHERE m.musicoterapeutaResp LIKE :musicoterapeutaResp";
+        TypedQuery qry = this.entityManager.createQuery(jpql, Sessao.class);
+        qry.setParameter("musicoterapeutaResp", musicoterapeutaResp);
+
+        List<Sessao> lst = qry.getResultList();
+        this.entityManager.close();
+
+        if (lst.isEmpty()) {
+            return null;
+        } else {
+            return lst.get(0);
+        }
+
     }
 
 }

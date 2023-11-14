@@ -4,10 +4,12 @@
  */
 package com.vcompany.teramusique.model.dao;
 
+import com.vcompany.teramusique.model.dao.contracts.Dao;
 import com.vcompany.teramusique.connection.DatabaseJPA;
 import com.vcompany.teramusique.exceptions.PacienteException;
 import com.vcompany.teramusique.model.Paciente;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -50,5 +52,20 @@ public class PacienteDao extends Dao<Paciente> {
             super.entityManager.close();
             
         }
+    }
+    
+    public List<Paciente> filterByName(String nome) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+        String jpql = "SELECT a "
+                + "FROM Paciente a "
+                + "WHERE a.nome like :nome";
+        TypedQuery qry = this.entityManager.createQuery(jpql, Paciente.class);
+        qry.setParameter("nome", nome + "%");
+
+        List<Paciente> lst = qry.getResultList();
+
+        this.entityManager.close();
+        return lst;
     }
 }

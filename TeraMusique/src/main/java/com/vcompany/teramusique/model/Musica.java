@@ -50,7 +50,6 @@ public class Musica {
     private List<Sessao> lstSessoes;
 
     public Musica() {
-        this.id = 0;
         this.titulo = "";
         this.artista = "";
         this.album = "";
@@ -59,8 +58,7 @@ public class Musica {
         this.finalidadeNaSessao = "";
     }
 
-    public Musica(Integer id, String titulo, String artista, String album, String genero, String duracao, String finalidadeNaSessao) {
-        this.id = id;
+    public Musica(String titulo, String artista, String album, String genero, String duracao, String finalidadeNaSessao) {
         this.titulo = titulo;
         this.artista = artista;
         this.album = album;
@@ -68,6 +66,19 @@ public class Musica {
         this.duracao = duracao;
         this.finalidadeNaSessao = finalidadeNaSessao;
 
+    }
+    
+    @Override
+    public String toString() {
+        String txt = "---- Dados do Musica ------\n"
+                + "id: " + this.id + "\n"
+                + super.toString()
+                + " Titulo: " + this.titulo + "\n"
+                + " Artista: " + this.artista + "\n"
+                + "Album: " + this.album + "\n"
+                + "-------------------------------------\n";
+
+        return txt;
     }
 
 }

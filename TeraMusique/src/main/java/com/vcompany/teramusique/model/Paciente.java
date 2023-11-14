@@ -2,7 +2,9 @@ package com.vcompany.teramusique.model;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,23 +13,25 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author 14892160652
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "Paciente")
+
+@DiscriminatorColumn(name = "nome")
+
 public class Paciente extends Pessoa {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String infoDeSaude;
     private Boolean tomaMedicacao;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "Paciente_Sessao",
             joinColumns  = {@JoinColumn(name = "paciente_id")},
@@ -37,31 +41,27 @@ public class Paciente extends Pessoa {
 
     public Paciente() {
         super();
-        this.id = 0;
         this.infoDeSaude = "";
         this.tomaMedicacao = false;
     }
 
-    public Paciente(Integer id, String nome, String sexo, Integer idade, String telefone, String infoDeSaude, Boolean tomaMedicacao) {
-        super(nome, sexo, idade, telefone);
-        this.id = id;
+    public Paciente(String nome, String sexo, Integer idade, String telefone, String infoDeSaude, Boolean tomaMedicacao, String email, String senha, Integer nivelAcesso) {
+        super(nome, sexo, idade, telefone, email, senha, nivelAcesso);
         this.infoDeSaude = infoDeSaude;
         this.tomaMedicacao = tomaMedicacao;
 
     }
 
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
+    @Override
+    public String toString() {
+        String txt = "---- Dados do Paciente ------\n"
+                + "id: " + this.id + "\n"
+                + super.toString()
+                + " Info de saude: " + this.infoDeSaude + "\n"
+                + " O Paciente toma medicacao: " + this.tomaMedicacao + "\n"
+                + "-------------------------------------\n";
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
+        return txt;
     }
 
     /**
@@ -91,4 +91,6 @@ public class Paciente extends Pessoa {
     public void setTomaMedicacao(Boolean tomaMedicacao) {
         this.tomaMedicacao = tomaMedicacao;
     }
+    
+    
 }

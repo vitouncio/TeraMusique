@@ -4,6 +4,7 @@
  */
 package com.vcompany.teramusique.model.dao;
 
+import com.vcompany.teramusique.model.dao.contracts.Dao;
 import com.vcompany.teramusique.connection.DatabaseJPA;
 import com.vcompany.teramusique.exceptions.InstrumentoException;
 import com.vcompany.teramusique.model.Instrumento;
