@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.vcompany.teramusique.view;
+package com.vcompany.teramusique.view.dialogs;
 
 import com.vcompany.teramusique.controller.PacienteController;
 import com.vcompany.teramusique.exceptions.PacienteException;
@@ -13,18 +13,22 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.vcompany.teramusique.view.FrHome;
+import java.awt.Frame;
 
 /**
  *
  * @author vitor
  */
-public class FrCadPaciente extends javax.swing.JFrame {
+public class DlgCadPaciente extends javax.swing.JDialog {
 
     /**
      * Creates new form FrCadPaciente
      */
-    public FrCadPaciente() {
+    public DlgCadPaciente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -38,17 +42,11 @@ public class FrCadPaciente extends javax.swing.JFrame {
 
         jTextField2 = new javax.swing.JTextField();
         panFormulario = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
         edtIdade = new javax.swing.JTextField();
         edtTelefone = new javax.swing.JTextField();
         edtInfoDeSaude = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        edtEmail = new javax.swing.JTextField();
-        edtSenha = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JToggleButton();
         rbtnMasculino = new javax.swing.JRadioButton();
         rbtnFeminino = new javax.swing.JRadioButton();
         rbtnOutro = new javax.swing.JRadioButton();
@@ -56,19 +54,19 @@ public class FrCadPaciente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         rbtnNao = new javax.swing.JRadioButton();
         rbtnSim = new javax.swing.JRadioButton();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        edtValidacaoDeSenha = new javax.swing.JPasswordField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        edtEmail = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        panFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
 
         edtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,25 +83,6 @@ public class FrCadPaciente extends javax.swing.JFrame {
         edtInfoDeSaude.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edtInfoDeSaudeActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Crie seu login");
-
-        edtEmail.setText("Seu e-mail");
-
-        edtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtSenhaActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Repita sua senha");
-
-        btnCadastrar.setText("Salvar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -127,15 +106,22 @@ public class FrCadPaciente extends javax.swing.JFrame {
 
         jLabel9.setText("Telefone");
 
-        edtValidacaoDeSenha.addActionListener(new java.awt.event.ActionListener() {
+        jLabel11.setText("O que te motivou a buscar a musicoterapia?");
+
+        jLabel12.setText("E-mail");
+
+        edtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtValidacaoDeSenhaActionPerformed(evt);
+                edtEmailActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Nova senha");
-
-        jLabel11.setText("O que te motivou a buscar a musicoterapia?");
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
         panFormulario.setLayout(panFormularioLayout);
@@ -146,7 +132,7 @@ public class FrCadPaciente extends javax.swing.JFrame {
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFormularioLayout.createSequentialGroup()
+                            .addGroup(panFormularioLayout.createSequentialGroup()
                                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(panFormularioLayout.createSequentialGroup()
                                         .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,53 +153,27 @@ public class FrCadPaciente extends javax.swing.JFrame {
                                     .addComponent(rbtnNao)
                                     .addComponent(rbtnSim)
                                     .addComponent(jLabel6)))
-                            .addGroup(panFormularioLayout.createSequentialGroup()
-                                .addComponent(edtInfoDeSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel12)
+                            .addComponent(edtInfoDeSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(edtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                .addComponent(edtTelefone, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(btnCadastrar))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(jLabel1))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(jLabel3))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(254, 254, 254)
+                        .addComponent(jButton1)))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panFormularioLayout.createSequentialGroup()
                     .addGap(6, 6, 6)
                     .addComponent(jLabel2)
-                    .addContainerGap(1014, Short.MAX_VALUE)))
+                    .addContainerGap(620, Short.MAX_VALUE)))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -221,7 +181,7 @@ public class FrCadPaciente extends javax.swing.JFrame {
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbtnMasculino)
                             .addComponent(rbtnSim))
@@ -242,32 +202,22 @@ public class FrCadPaciente extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtInfoDeSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnCadastrar)
-                .addGap(89, 89, 89))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panFormularioLayout.createSequentialGroup()
                     .addGap(189, 189, 189)
                     .addComponent(jLabel2)
-                    .addContainerGap(359, Short.MAX_VALUE)))
+                    .addContainerGap(159, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,19 +225,70 @@ public class FrCadPaciente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void edtInfoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtInfoDeSaudeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtInfoDeSaudeActionPerformed
+
+    private void edtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtTelefoneActionPerformed
+
+    private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_edtNomeActionPerformed
+
+    private void edtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtEmailActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:// TODO add your handling code here:
+        String sexo = null;
+        String tomaMedicacao = null;
+
+        if (rbtnMasculino.isSelected()) {
+            sexo = "Masculino";
+        } else if (rbtnFeminino.isSelected()) {
+            sexo = "Feminino";
+        } else if (rbtnOutro.isSelected()) {
+            sexo = "Outro";
+        } else if (!rbtnMasculino.isSelected() && !rbtnFeminino.isSelected() && !rbtnOutro.isSelected()) {
+            DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(new Frame(), true, "Marque um campo em 'Sexo'.");
+            popup.setVisible(true);        
+        }
+        
+        if (rbtnSim.isSelected()){
+            tomaMedicacao = "Sim";
+        } else if (rbtnNao.isSelected()){
+            tomaMedicacao = "Não";
+        }
+        
+            Integer idade = Integer.parseInt(edtIdade.getText());
+
+            PacienteController pCont = new PacienteController();
+            Paciente p = new Paciente(edtNome.getText(), sexo, idade, edtTelefone.getText(), edtInfoDeSaude.getText(), tomaMedicacao, edtEmail.getText(), "desnecessario", 0);
+
+            pCont.cadastrarPaciente(p);
+
+            dispose();
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panFormulario.getComponents().length; i++) {
@@ -301,101 +302,27 @@ public class FrCadPaciente extends javax.swing.JFrame {
         edtTelefone.setText("");
         edtInfoDeSaude.setText("");
         edtEmail.setText("");
-        edtSenha.setText("");
     }
-
-    private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_edtNomeActionPerformed
-
-    private void edtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtSenhaActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
-        String sexo = null;
-        boolean tomaMedicacao = false;
-
-        if (rbtnMasculino.isSelected()) {
-            sexo = "Masculino";
-        } else if (rbtnFeminino.isSelected()) {
-            sexo = "Feminino";
-        } else if (rbtnOutro.isSelected()) {
-            sexo = "Outro";
-        } else if (!rbtnMasculino.isSelected() && !rbtnFeminino.isSelected() && !rbtnOutro.isSelected()) {
-            DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(this, true, "Marque um campo em 'Sexo'.");
-            popup.setVisible(true);
-        }
-
-        if (rbtnSim.isSelected()) {
-            tomaMedicacao = true;
-        } else if (rbtnNao.isSelected()) {
-            tomaMedicacao = false;
-        } else if (!rbtnSim.isSelected() && !rbtnNao.isSelected()) {
-            DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(this, true, "Informe se voce toma medicacao.");
-            popup.setVisible(true);
-        }
-        
-        String senha = edtSenha.getText();
-        String senhaValidada = edtValidacaoDeSenha.getText();
-        
-        if(senha.equals(senhaValidada)){
-
-        String idadeString = edtIdade.getText();
-        Integer idade = Integer.parseInt(idadeString);
-
-        PacienteController pCont = new PacienteController();
-        Paciente p = new Paciente(edtNome.getText(), sexo, idade, edtTelefone.getText(), edtInfoDeSaude.getText(), tomaMedicacao, edtEmail.getText(), senhaValidada, 0);
-
-        pCont.cadastrarPaciente(p);
-
-        dispose();
-        
-        } else {
-            new DlgPopUpCampoVazio(this, true, "Informe a mesma senha no campo de validação.");
-        }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void edtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtTelefoneActionPerformed
-
-    private void edtValidacaoDeSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtValidacaoDeSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtValidacaoDeSenhaActionPerformed
-
-    private void edtInfoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtInfoDeSaudeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtInfoDeSaudeActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnCadastrar;
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtIdade;
     private javax.swing.JTextField edtInfoDeSaude;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JPasswordField edtSenha;
     private javax.swing.JTextField edtTelefone;
-    private javax.swing.JPasswordField edtValidacaoDeSenha;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panFormulario;
     private javax.swing.JRadioButton rbtnFeminino;

@@ -25,7 +25,7 @@ public class TMCadSessao extends AbstractTableModel {
     private final int COL_MUSICAS = 5;       
 
     public TMCadSessao(List lstSessao) {        
-        lista = lstSessao;        
+        this.lista = lstSessao;        
     }
 
     @Override
@@ -55,13 +55,13 @@ public class TMCadSessao extends AbstractTableModel {
                  case COL_HORARIO:
                     return aux.getHorario();
                 case COL_MUSICOTERAPEUTA_RESP:
-                    return aux.getMusicoterapeutaResp();
+                    return aux.getMusicoterapeutaRespToString();
                 case COL_MUSICOTERAPEUTAS:
-                    return aux.getLstMusicoterapeutas();
+                    return aux.getLstMusicoterapeutasToString();
                 case COL_PACIENTES:
-                    return aux.getLstPacientes();
+                    return aux.getLstPacientesToString();
                 case COL_MUSICAS:
-                    return aux.getLstMusicas();
+                    return aux.getLstMusicasToString();
                 default: 
                     break;
             }

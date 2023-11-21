@@ -27,9 +27,13 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        setLocationRelativeTo(null);
+
         mCont = new MusicoterapeutaController();
         this.musicoterapeutaEscolhido = new Musicoterapeuta();
         this.sessao = sessao;
+
+        this.mCont.atualizarTabela(grdMusicoterapeutasDisponiveis);
 
     }
 
@@ -45,8 +49,8 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
         jSplitPane2 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         edtFiltrarNome = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         grdPacientes = new javax.swing.JScrollPane();
         grdMusicoterapeutasDisponiveis = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -56,13 +60,15 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Filtrar (Nome) : ");
+        jSplitPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar musicoterapeuta para sessão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
 
         edtFiltrarNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 edtFiltrarNomeKeyPressed(evt);
             }
         });
+
+        jLabel1.setText("Filtrar por nome : ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -72,17 +78,17 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         grdPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,22 +119,20 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(grdPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(grdPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(9, 9, 9)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(grdPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(grdPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -151,20 +155,20 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 60, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(96, 96, 96)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAdicionar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane2.setRightComponent(jPanel2);
@@ -173,16 +177,15 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 861, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -198,10 +201,11 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
         musicoterapeutaEscolhido = (Musicoterapeuta) this.getObjetoSelecionadoNaGrid();
 
         if (musicoterapeutaEscolhido == null) {
-            JOptionPane.showMessageDialog(this, "Pirmeiro, selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro, selecione um registro na tabela.");
         } else {
             txtMusicoterapeutasSelecionados.setText(musicoterapeutaEscolhido.toString());
         }
+
 
     }//GEN-LAST:event_grdMusicoterapeutasDisponiveisMouseClicked
 
@@ -216,6 +220,9 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
+        
+        musicoterapeutaEscolhido = (Musicoterapeuta) this.getObjetoSelecionadoNaGrid();
+
         if (musicoterapeutaEscolhido == null) {
             int response = JOptionPane.showConfirmDialog(null,
                     "Nenhum item foi escolhido. Deseja continuar?",
@@ -227,14 +234,12 @@ public class DlgSelecaoMusicoterapeutaParaSessao extends javax.swing.JDialog {
                 dispose();
             }
         } else {
-            if (sessao.getMusicoterapeutaResp().equals(musicoterapeutaEscolhido)) {
+            if (sessao.getLstMusicoterapeutas().contains(musicoterapeutaEscolhido)) {
                 JOptionPane.showMessageDialog(null, "Este musicoterapeuta já está cadastrado.");
             } else if (sessao.getLstMusicoterapeutas() == null) {
                 JOptionPane.showMessageDialog(null, "Lista de musicoterapeutas vazia.");
             } else {
-                
-                this.sessao.setMusicoterapeutaResp(musicoterapeutaEscolhido);
-                this.sessao.getLstMusicoterapeutas().add(musicoterapeutaEscolhido);
+                sessao.getLstMusicoterapeutas().add(musicoterapeutaEscolhido);
                 dispose();
 
             }

@@ -7,6 +7,7 @@ package com.vcompany.teramusique.view.dialogs;
 import com.vcompany.teramusique.controller.PacienteController;
 import com.vcompany.teramusique.model.Paciente;
 import com.vcompany.teramusique.model.Sessao;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -23,21 +24,20 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
      * Creates new form DlgSelecaoPacientesParaSessao
      */
     PacienteController pCont;
-    Sessao sessao;
+    Sessao sessaoSendoCadastrada;
     Paciente pacienteEscolhido;
-    
-    
-    public DlgSelecaoPacientesParaSessao(java.awt.Frame parent, boolean modal) {
+
+    public DlgSelecaoPacientesParaSessao(java.awt.Frame parent, boolean modal, Sessao sessao) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
 
-        pCont = new PacienteController();
+        this.pCont = new PacienteController();
         this.pacienteEscolhido = new Paciente();
-        this.sessao = sessao;
+        this.sessaoSendoCadastrada = sessao;
 
+        this.pCont.atualizarTabela(grdPacientesDisponiveis);
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +53,7 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         edtFiltrarNome = new javax.swing.JTextField();
+        btnNovoPaciente = new javax.swing.JButton();
         grdPacientes = new javax.swing.JScrollPane();
         grdPacientesDisponiveis = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -62,11 +63,25 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jSplitPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar paciente para sessão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
+
         jLabel1.setText("Filtrar (Nome) : ");
 
+        edtFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtFiltrarNomeActionPerformed(evt);
+            }
+        });
         edtFiltrarNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 edtFiltrarNomeKeyPressed(evt);
+            }
+        });
+
+        btnNovoPaciente.setText("Novo Paciente");
+        btnNovoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoPacienteActionPerformed(evt);
             }
         });
 
@@ -75,11 +90,13 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNovoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +104,8 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(btnNovoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -119,23 +137,25 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(grdPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(grdPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(grdPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addComponent(grdPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jSplitPane2.setLeftComponent(jPanel1);
@@ -145,27 +165,34 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
         jScrollPane2.setViewportView(txtPacienteSelecionado);
 
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 60, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAdicionar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jSplitPane2.setRightComponent(jPanel2);
@@ -177,14 +204,14 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,28 +224,68 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
     private void grdPacientesDisponiveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPacientesDisponiveisMouseClicked
         // TODO add your handling code here:
         pacienteEscolhido = (Paciente) this.getObjetoSelecionadoNaGrid();
-        
-        if(pacienteEscolhido == null){
-            JOptionPane.showMessageDialog(this, "Pirmeiro, selecione um registro na tabela.");
+
+        if (pacienteEscolhido == null) {
+            JOptionPane.showMessageDialog(this, "Pirmeiro, selecione um paciente na tabela.");
         } else {
-           txtPacienteSelecionado.setText(pacienteEscolhido.toString());
+            txtPacienteSelecionado.setText(pacienteEscolhido.toString());
         }
-        
+
     }//GEN-LAST:event_grdPacientesDisponiveisMouseClicked
 
     private void edtFiltrarNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtFiltrarNomeKeyPressed
         // TODO add your handling code here:
         String nomeDigitado = edtFiltrarNome.getText();
-        if(!nomeDigitado.isEmpty())
+        if (!nomeDigitado.isEmpty())
             this.pCont.atualizarTabela(grdPacientesDisponiveis, nomeDigitado);
-        else 
+        else
             this.pCont.atualizarTabela(grdPacientesDisponiveis);
     }//GEN-LAST:event_edtFiltrarNomeKeyPressed
 
-  
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        pacienteEscolhido = (Paciente) this.getObjetoSelecionadoNaGrid();
+
+        if (pacienteEscolhido == null) {
+            int response = JOptionPane.showConfirmDialog(null,
+                    "Nenhum paciente selecionado. Deseja continuar?",
+                    "Confirm",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+                dispose();
+            }
+        } else {
+            this.sessaoSendoCadastrada.getLstPacientes().add(pacienteEscolhido);
+            dispose();
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdPacientesDisponiveis.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdPacientesDisponiveis.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+
+    private void edtFiltrarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtFiltrarNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtFiltrarNomeActionPerformed
+
+    private void btnNovoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoPacienteActionPerformed
+        // TODO add your handling code here:
+        DlgCadPaciente telaCadPaciente = new DlgCadPaciente(new Frame(), true);
+        telaCadPaciente.setVisible(true);
+
+        pCont.atualizarTabela(grdPacientesDisponiveis);
+    }//GEN-LAST:event_btnNovoPacienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnNovoPaciente;
     private javax.swing.JTextField edtFiltrarNome;
     private javax.swing.JScrollPane grdPacientes;
     private javax.swing.JTable grdPacientesDisponiveis;
@@ -231,12 +298,4 @@ public class DlgSelecaoPacientesParaSessao extends javax.swing.JDialog {
     private javax.swing.JTextArea txtPacienteSelecionado;
     // End of variables declaration//GEN-END:variables
 
-private Object getObjetoSelecionadoNaGrid(){
-    int rowClicked = grdPacientesDisponiveis.getSelectedRow();
-    Object obj = null;
-    if(rowClicked >= 0) {
-        obj = grdPacientesDisponiveis.getModel().getValueAt(rowClicked, -1);
-    }
-    return obj;
-}
 }

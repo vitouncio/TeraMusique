@@ -4,9 +4,15 @@
  */
 package com.vcompany.teramusique.view;
 
+import com.vcompany.teramusique.view.dialogs.DlgObsSessao;
 import com.vcompany.teramusique.controller.MusicoterapeutaController;
+import com.vcompany.teramusique.controller.SessaoController;
 import com.vcompany.teramusique.view.dialogs.DlgCadSessao;
 import com.vcompany.teramusique.model.Musicoterapeuta;
+import com.vcompany.teramusique.model.Sessao;
+import java.awt.Frame;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,22 +22,37 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
 
     MusicoterapeutaController mController;
     Musicoterapeuta musicoterapeutaLogado;
-    
-    
+    SessaoController sController;
+
     public FrMenuMusicoterapeuta(Musicoterapeuta musicoterapeuta) {
+
         initComponents();
+
+        setLocationRelativeTo(null);
 
         this.musicoterapeutaLogado = musicoterapeuta;
         this.mController = new MusicoterapeutaController();
+        this.sController = new SessaoController();
+
+        musicoterapeutaLogado.setLstSessoes(musicoterapeuta.getLstSessoes());
         
         lblNome.setText(musicoterapeutaLogado.getNome());
         lblEspecializacao.setText(musicoterapeutaLogado.getEspecializacao());
+        mostrarTabelaDeSessoes();
+    }
+
+    public void mostrarTabelaDeSessoes() {
+
+        
+       // List<Sessao> lstSessoes = sController.buscarSessaoPorMusicoterapeuta(musicoterapeutaLogado);
+        mController.atualizarTabelaSessaoMusicoterapeuta(grdSessoesMusicoterapeuta, musicoterapeutaLogado.getLstSessoes());
+
     }
 
     public void habilitarCampos(boolean flag) {
-      
+
         btnAddSessao.setEnabled(flag);
-        
+
         mController.atualizarTabelaSessaoMusicoterapeuta(grdSessoesMusicoterapeuta, musicoterapeutaLogado.getLstSessoes());
 
     }
@@ -39,10 +60,9 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
     public void limparCampos() {
 
 //        sCont.atualizarTabelaPacienteSessao(grdPacientesSelecionados, sessaoCorrente.getLstPacientes());
-
         //este comando serve para trocar de aba usando Jtabbedblabla. 
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +72,7 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        pnlMusicoterapeuta = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblEspecializacao = new javax.swing.JLabel();
@@ -62,8 +82,7 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
-        jLabel1.setText("Perfil de Musicoterapeuta");
+        pnlMusicoterapeuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Perfil do Musicoterapeuta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -89,6 +108,12 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane2MouseClicked(evt);
+            }
+        });
+
         grdSessoesMusicoterapeuta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -100,50 +125,70 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
 
             }
         ));
+        grdSessoesMusicoterapeuta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdSessoesMusicoterapeutaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(grdSessoesMusicoterapeuta);
+
+        javax.swing.GroupLayout pnlMusicoterapeutaLayout = new javax.swing.GroupLayout(pnlMusicoterapeuta);
+        pnlMusicoterapeuta.setLayout(pnlMusicoterapeutaLayout);
+        pnlMusicoterapeutaLayout.setHorizontalGroup(
+            pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblEspecializacao))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMusicoterapeutaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAddSessao)
+                                .addContainerGap())))))
+        );
+        pnlMusicoterapeutaLayout.setVerticalGroup(
+            pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                .addGroup(pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAddSessao)
+                    .addGroup(pnlMusicoterapeutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlMusicoterapeutaLayout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(lblNome)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblEspecializacao))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblEspecializacao))
-                        .addContainerGap(399, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddSessao)
-                        .addGap(36, 36, 36))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(pnlMusicoterapeuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnAddSessao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEspecializacao))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlMusicoterapeuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,9 +196,42 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
 
     private void btnAddSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSessaoActionPerformed
         // TODO add your handling code here:
-        DlgCadSessao cadSessao = new DlgCadSessao(this, true);
+        DlgCadSessao cadSessao = new DlgCadSessao(this, true, musicoterapeutaLogado);
         cadSessao.setVisible(true);
+
+        this.mController.atualizarTabelaSessaoMusicoterapeuta(grdSessoesMusicoterapeuta, musicoterapeutaLogado.getLstSessoes());
     }//GEN-LAST:event_btnAddSessaoActionPerformed
+
+    private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
+        // TODO add your handling code here:
+
+        Sessao objetoSelecionado = (Sessao) getObjetoSelecionadoNaGrid();
+
+        if (objetoSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Selecione uma sessão");
+        }
+
+
+    }//GEN-LAST:event_jScrollPane2MouseClicked
+
+    private void grdSessoesMusicoterapeutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdSessoesMusicoterapeutaMouseClicked
+        // TODO add your handling code here:
+        Sessao objetoSelecionado = (Sessao) getObjetoSelecionadoNaGrid();
+        if (evt.getClickCount() == 2) {
+
+            DlgObsSessao telaObs = new DlgObsSessao(new Frame(), true, objetoSelecionado);
+
+        }
+    }//GEN-LAST:event_grdSessoesMusicoterapeutaMouseClicked
+
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdSessoesMusicoterapeuta.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdSessoesMusicoterapeuta.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
 
     /**
      * @param args the command line arguments
@@ -162,10 +240,10 @@ public class FrMenuMusicoterapeuta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSessao;
     private javax.swing.JTable grdSessoesMusicoterapeuta;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblEspecializacao;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JPanel pnlMusicoterapeuta;
     // End of variables declaration//GEN-END:variables
 }

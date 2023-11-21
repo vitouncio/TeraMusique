@@ -1,5 +1,6 @@
 package com.vcompany.teramusique.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,7 @@ public class Instrumento {
         this.nome = "";
         this.descricao = "";
         this.quantDisponivel = 0;
+        
     }
 
     public Instrumento(Integer id, String nome, String descricao, Integer quantDisponivel) {

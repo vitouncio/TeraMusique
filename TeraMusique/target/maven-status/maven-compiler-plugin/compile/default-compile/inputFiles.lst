@@ -1,6 +1,8 @@
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\valid\ValidatePaciente.java
+C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\dialogs\DlgSelecaoMusicoterapeutaRespParaSessao.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\FrMenuMusicoterapeuta.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\exceptions\InstrumentoException.java
+C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\dialogs\DlgObsSessao.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\FrHome.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\controller\MusicaController.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\model\Paciente.java
@@ -9,10 +11,9 @@ C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\controller\SessaoController.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\exceptions\MusicoterapeutaException.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\controller\Util.java
-C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\FrObsSessao.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\model\Musica.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\model\dao\PessoaDAO.java
-C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\FrCadPaciente.java
+C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\dialogs\DlgCadPaciente.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\FrMenuPaciente.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\view\popups\DlgPopUpCampoVazio.java
 C:\Users\vitor\Documents\NetBeansProjects\TeraMusique\TeraMusique\src\main\java\com\vcompany\teramusique\model\dao\MusicaDao.java

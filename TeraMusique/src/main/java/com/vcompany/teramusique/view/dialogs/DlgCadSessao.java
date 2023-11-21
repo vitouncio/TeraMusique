@@ -7,8 +7,10 @@ package com.vcompany.teramusique.view.dialogs;
 import com.vcompany.teramusique.controller.MusicoterapeutaController;
 import com.vcompany.teramusique.controller.SessaoController;
 import com.vcompany.teramusique.exceptions.SessaoException;
+import com.vcompany.teramusique.model.Musicoterapeuta;
 import com.vcompany.teramusique.model.Sessao;
 import java.awt.Frame;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,19 +22,28 @@ public class DlgCadSessao extends javax.swing.JDialog {
     /**
      * Creates new form DlgCadSessao
      */
+    Musicoterapeuta musicoterapeutaLogado;
     MusicoterapeutaController musicoterapeutaCont;
     SessaoController sCont;
     Sessao sessaoCorrente;
 
-    public DlgCadSessao(java.awt.Frame parent, boolean modal) {
+    public DlgCadSessao(java.awt.Frame parent, boolean modal, Musicoterapeuta musicoterapeuta) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+
         
-        musicoterapeutaCont = new MusicoterapeutaController();
-        sCont = new SessaoController();
-        this.sessaoCorrente = new Sessao();
+        this.musicoterapeutaLogado = musicoterapeuta;
+        this.musicoterapeutaCont = new MusicoterapeutaController();
+        
+        this.sCont = new SessaoController();
+        
+        
+        this.musicoterapeutaCont.atualizarTabelaSessaoMusicoterapeuta(grdTodasAsSessoes, musicoterapeutaLogado.getLstSessoes());
+        
         this.habilitarCampos(false);
         this.limparCampos();
+
 
     }
 
@@ -61,7 +72,6 @@ public class DlgCadSessao extends javax.swing.JDialog {
         edtInfoPosSessao.setText("");
 
 //        sCont.atualizarTabelaPacienteSessao(grdPacientesSelecionados, sessaoCorrente.getLstPacientes());
-
         //este comando serve para trocar de aba usando Jtabbedblabla. 
         tblpDados.setSelectedComponent(abaFormulario);
     }
@@ -71,9 +81,9 @@ public class DlgCadSessao extends javax.swing.JDialog {
         edtHorario.setText(sessao.getHorario());
         edtMusicoterapeutaResp.setText(sessao.getMusicoterapeutaResp().toString());
 
-        sCont.atualizarTabelaMusicoterapeutasSessao(grdMusicoterapeutasSelecionados, sessao.getLstMusicoterapeutas());
+        sCont.atualizarTabelaMusicoterapeutasSelecionadosParaSessao(grdMusicoterapeutasSelecionados, sessao.getLstMusicoterapeutas());
 
-        sCont.atualizarTabelaPacienteSessao(grdTodasAsSessoes, sessao.getLstPacientes());
+        sCont.atualizarTabelaPacientesParaSessao(grdTodasAsSessoes, sessao.getLstPacientes());
 
     }
 
@@ -99,6 +109,11 @@ public class DlgCadSessao extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdPacientesSelecionados = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        pnlInfoSessao = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        edtInfoPreSessao = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        edtInfoPosSessao = new javax.swing.JTextField();
         pnlMusicoterapeuta = new javax.swing.JPanel();
         edtMusicoterapeutaResp = new javax.swing.JTextField();
         lblMusicoterapeutaResp = new javax.swing.JLabel();
@@ -107,11 +122,6 @@ public class DlgCadSessao extends javax.swing.JDialog {
         btnSelecionarMusicoterapeutas = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         grdMusicoterapeutasSelecionados = new javax.swing.JTable();
-        pnlInfoSessao = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        edtInfoPreSessao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        edtInfoPosSessao = new javax.swing.JTextField();
         pnlMusicas = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnSelecionarMusica = new javax.swing.JButton();
@@ -169,6 +179,11 @@ public class DlgCadSessao extends javax.swing.JDialog {
         );
 
         btnAdicionarPaciente.setText("Adicionar");
+        btnAdicionarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarPacienteActionPerformed(evt);
+            }
+        });
 
         grdPacientesSelecionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,6 +200,52 @@ public class DlgCadSessao extends javax.swing.JDialog {
 
         jLabel6.setText("Paciente(s)");
 
+        jLabel1.setText("Informações da sessão");
+
+        edtInfoPreSessao.setText("jTextField1");
+
+        jLabel2.setText("Informações pós sessão (Atualize depois da sessão)");
+
+        edtInfoPosSessao.setText("jTextField1");
+
+        javax.swing.GroupLayout pnlInfoSessaoLayout = new javax.swing.GroupLayout(pnlInfoSessao);
+        pnlInfoSessao.setLayout(pnlInfoSessaoLayout);
+        pnlInfoSessaoLayout.setHorizontalGroup(
+            pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtInfoPreSessao)
+                    .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(edtInfoPosSessao)
+                    .addContainerGap()))
+        );
+        pnlInfoSessaoLayout.setVerticalGroup(
+            pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtInfoPreSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(96, Short.MAX_VALUE))
+            .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
+                    .addContainerGap(146, Short.MAX_VALUE)
+                    .addComponent(edtInfoPosSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
         javax.swing.GroupLayout pnlPacientesLayout = new javax.swing.GroupLayout(pnlPacientes);
         pnlPacientes.setLayout(pnlPacientesLayout);
         pnlPacientesLayout.setHorizontalGroup(
@@ -199,6 +260,7 @@ public class DlgCadSessao extends javax.swing.JDialog {
                         .addComponent(btnAdicionarPaciente)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(pnlInfoSessao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlPacientesLayout.setVerticalGroup(
             pnlPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +271,9 @@ public class DlgCadSessao extends javax.swing.JDialog {
                     .addComponent(btnAdicionarPaciente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlInfoSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         edtMusicoterapeutaResp.setText("jTextField3");
@@ -291,52 +355,6 @@ public class DlgCadSessao extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Informações da sessão");
-
-        edtInfoPreSessao.setText("jTextField1");
-
-        jLabel2.setText("Informações pós sessão (Atualize depois da sessão)");
-
-        edtInfoPosSessao.setText("jTextField1");
-
-        javax.swing.GroupLayout pnlInfoSessaoLayout = new javax.swing.GroupLayout(pnlInfoSessao);
-        pnlInfoSessao.setLayout(pnlInfoSessaoLayout);
-        pnlInfoSessaoLayout.setHorizontalGroup(
-            pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edtInfoPreSessao)
-                    .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(edtInfoPosSessao)
-                    .addContainerGap()))
-        );
-        pnlInfoSessaoLayout.setVerticalGroup(
-            pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtInfoPreSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addGroup(pnlInfoSessaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlInfoSessaoLayout.createSequentialGroup()
-                    .addContainerGap(146, Short.MAX_VALUE)
-                    .addComponent(edtInfoPosSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
-
         jLabel5.setText("Selecione pelo menos uma música para conduzir a sessão");
 
         btnSelecionarMusica.setText("jButton1");
@@ -401,9 +419,7 @@ public class DlgCadSessao extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addGroup(abaFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlInfoSessao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(pnlPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         abaFormularioLayout.setVerticalGroup(
             abaFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,13 +429,11 @@ public class DlgCadSessao extends javax.swing.JDialog {
                     .addGroup(abaFormularioLayout.createSequentialGroup()
                         .addComponent(pnlDadosSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(pnlMusicoterapeuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlMusicoterapeuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(abaFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlInfoSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         tblpDados.addTab("Formulário", abaFormulario);
@@ -441,17 +455,19 @@ public class DlgCadSessao extends javax.swing.JDialog {
         abaTodasAsSessoes.setLayout(abaTodasAsSessoesLayout);
         abaTodasAsSessoesLayout.setHorizontalGroup(
             abaTodasAsSessoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
         );
         abaTodasAsSessoesLayout.setVerticalGroup(
             abaTodasAsSessoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaTodasAsSessoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tblpDados.addTab("Todas as sessões", abaTodasAsSessoes);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de sessão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))))); // NOI18N
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -497,23 +513,22 @@ public class DlgCadSessao extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(293, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(tblpDados, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(46, 46, 46)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tblpDados, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(tblpDados, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -522,17 +537,28 @@ public class DlgCadSessao extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         try {
+            List<Musicoterapeuta> lst = sessaoCorrente.getLstMusicoterapeutas();
 
-            Sessao s = new Sessao(edtData.getText(), edtHorario.getText(), edtInfoPreSessao.getText(), edtInfoPosSessao.getText(),
+            this.sessaoCorrente = new Sessao(edtData.getText(), edtHorario.getText(), edtInfoPreSessao.getText(), edtInfoPosSessao.getText(),
                     sessaoCorrente.getMusicoterapeutaResp(),
-                    sessaoCorrente.getLstMusicoterapeutas(),
+                    lst,
                     sessaoCorrente.getLstMusicas(),
                     sessaoCorrente.getLstPacientes());
 
-            sCont.cadastrarSessao(s);
+            
+            //  ERRO AO CADASTRAR SESSAO: AO SALVAR A NOVA SESSAO CADASTRADA
+            //  O HIBERNATE NÃO SALVA AS CHAVES ESTRANGEIRAS DE MUSICOTERAPEUTA E SESSAO
+            //  NA TABELA MUSICOTERAPEUTAS_SESSAO
+            //  certamente o erro ocorre devido ao relacionamento de uma lista com outra lista
+            //  acredito que não seja possível apresentar uma lista de ids de musicoterapeutas na coluna de 
+            //  musicoterapeutas participantes em cada sessao.
+            
+            
+            sCont.cadastrarSessao(sessaoCorrente);
+            musicoterapeutaLogado.getLstSessoes().add(sessaoCorrente);
 
-            dispose();
-
+            
+            
             sCont.atualizarTabela(grdMusicoterapeutasSelecionados);
             sCont.atualizarTabela(grdPacientesSelecionados);
 
@@ -544,6 +570,7 @@ public class DlgCadSessao extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e);
         }
 
+        dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -590,7 +617,10 @@ public class DlgCadSessao extends javax.swing.JDialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+
         sessaoCorrente = (Sessao) this.getObjetoSelecionadoNaGrid();
+
+        tblpDados.setSelectedIndex(1);
 
         if (sessaoCorrente == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -598,14 +628,16 @@ public class DlgCadSessao extends javax.swing.JDialog {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(sessaoCorrente);
+            tblpDados.setSelectedIndex(0);
+
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSelecionarMusicoterapeutaRespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarMusicoterapeutaRespActionPerformed
         // TODO add your handling code here:
-        DlgSelecaoMusicoterapeutaParaSessao telaMusicoterapeuta = new DlgSelecaoMusicoterapeutaParaSessao(new Frame(), true, sessaoCorrente);
-        telaMusicoterapeuta.setVisible(true);
-        
+        DlgSelecaoMusicoterapeutaRespParaSessao telaMusicoterapeutaResp = new DlgSelecaoMusicoterapeutaRespParaSessao(new Frame(), true, sessaoCorrente);
+        telaMusicoterapeutaResp.setVisible(true);
+
         edtMusicoterapeutaResp.setText(sessaoCorrente.getMusicoterapeutaResp().toStringNome());
     }//GEN-LAST:event_btnSelecionarMusicoterapeutaRespActionPerformed
 
@@ -613,19 +645,30 @@ public class DlgCadSessao extends javax.swing.JDialog {
         // TODO add your handling code here:
         DlgSelecaoMusicaParaSessao telaMusica = new DlgSelecaoMusicaParaSessao(new Frame(), true, sessaoCorrente);
         telaMusica.setVisible(true);
+
+        this.sCont.atualizarTabelaMusicasSelecionadasParaSessao(grdMusicasSelecionadas, sessaoCorrente.getLstMusicas());
     }//GEN-LAST:event_btnSelecionarMusicaActionPerformed
 
     private void btnSelecionarMusicoterapeutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarMusicoterapeutasActionPerformed
         // TODO add your handling code here:
         DlgSelecaoMusicoterapeutaParaSessao telaMusicoterapeutas = new DlgSelecaoMusicoterapeutaParaSessao(new Frame(), true, sessaoCorrente);
         telaMusicoterapeutas.setVisible(true);
-        
-        sCont.atualizarTabelaMusicoterapeutasSessao(grdMusicoterapeutasSelecionados, sessaoCorrente.getLstMusicoterapeutas());
+
+        sCont.atualizarTabelaMusicoterapeutasSelecionadosParaSessao(grdMusicoterapeutasSelecionados, sessaoCorrente.getLstMusicoterapeutas());
     }//GEN-LAST:event_btnSelecionarMusicoterapeutasActionPerformed
 
     private void edtMusicoterapeutaRespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtMusicoterapeutaRespActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_edtMusicoterapeutaRespActionPerformed
+
+    private void btnAdicionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPacienteActionPerformed
+        // TODO add your handling code here:
+        DlgSelecaoPacientesParaSessao telaSelecaoPacientes = new DlgSelecaoPacientesParaSessao(new Frame(), true, sessaoCorrente);
+        telaSelecaoPacientes.setVisible(true);
+
+        sCont.atualizarTabelaPacientesParaSessao(grdPacientesSelecionados, sessaoCorrente.getLstPacientes());
+    }//GEN-LAST:event_btnAdicionarPacienteActionPerformed
 
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdTodasAsSessoes.getSelectedRow();

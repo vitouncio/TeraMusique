@@ -4,10 +4,12 @@
  */
 package com.vcompany.teramusique.controller;
 
+import com.vcompany.teramusique.controller.tableModel.TMCadMusica;
 import com.vcompany.teramusique.controller.tableModel.TMCadMusicoterapeuta;
 import com.vcompany.teramusique.controller.tableModel.TMCadPaciente;
 import com.vcompany.teramusique.controller.tableModel.TMCadSessao;
 import com.vcompany.teramusique.exceptions.SessaoException;
+import com.vcompany.teramusique.model.Musica;
 import com.vcompany.teramusique.model.Musicoterapeuta;
 import com.vcompany.teramusique.model.Paciente;
 import com.vcompany.teramusique.model.Sessao;
@@ -57,13 +59,18 @@ public class SessaoController {
 
     }
 
-    public void atualizarTabelaPacienteSessao(JTable grd, List<Paciente> lst) {
+    public void atualizarTabelaPacientesParaSessao(JTable grd, List<Paciente> lst) {
         TMCadPaciente tableModel = new TMCadPaciente(lst);
         grd.setModel(tableModel);
     }
 
-    public void atualizarTabelaMusicoterapeutasSessao(JTable grd, List<Musicoterapeuta> lst) {
+    public void atualizarTabelaMusicoterapeutasSelecionadosParaSessao(JTable grd, List<Musicoterapeuta> lst) {
         TMCadMusicoterapeuta tableModel = new TMCadMusicoterapeuta(lst);
+        grd.setModel(tableModel);
+    }
+    
+    public void atualizarTabelaMusicasSelecionadasParaSessao(JTable grd, List<Musica> lst) {
+        TMCadMusica tableModel = new TMCadMusica(lst);
         grd.setModel(tableModel);
     }
 
@@ -82,4 +89,8 @@ public class SessaoController {
     public List<Sessao> filtrarPorMusicoterapeutaResp(Musicoterapeuta musicoterapeuta) {
         return (List<Sessao>) repositorio.filterByMusicoterapeutaResp(musicoterapeuta);
     }
+    
+//    public List<Sessao> buscarSessaoPorMusicoterapeuta(Musicoterapeuta musicoterapeuta){
+//        return (List<Sessao>) repositorio.buscarLstSessoesPorMusicoterapeuta(musicoterapeuta);
+//    }
 }

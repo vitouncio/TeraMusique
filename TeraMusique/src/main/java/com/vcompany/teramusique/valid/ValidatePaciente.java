@@ -7,7 +7,7 @@ package com.vcompany.teramusique.valid;
 import com.vcompany.teramusique.exceptions.PacienteException;
 import com.vcompany.teramusique.exceptions.SessaoException;
 import com.vcompany.teramusique.model.Paciente;
-import com.vcompany.teramusique.view.FrCadPaciente;
+import com.vcompany.teramusique.view.dialogs.DlgCadPaciente;
 import com.vcompany.teramusique.view.popups.DlgPopUpCampoVazio;
 import java.awt.Frame;
 
@@ -17,57 +17,56 @@ import java.awt.Frame;
  */
 public class ValidatePaciente {
     
-    FrCadPaciente parentCadPaciete;
 
     public Paciente validaCamposEntrada(Paciente validaPaciente) {
         Paciente paciente = new Paciente();
 
         if (validaPaciente.getNome().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Campo 'Nome' vazio");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Campo 'Nome' vazio");
         }
 
         paciente.setNome(validaPaciente.getNome());
 
         if (validaPaciente.getSexo().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Informe seu sexo.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Informe seu sexo.");
         }
 
         paciente.setSexo(validaPaciente.getSexo());
 
         if (validaPaciente.getIdade() < 0) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Idade não permitida.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Idade não permitida.");
         }
         
         if (String.valueOf(validaPaciente.getIdade()).isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Campo 'idade' vazio.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Campo 'idade' vazio.");
         }
         
         paciente.setIdade(validaPaciente.getIdade());
 
         if (validaPaciente.getTelefone().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Campo 'Telefone' vazio.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Campo 'Telefone' vazio.");
         }
 
         paciente.setTelefone(validaPaciente.getTelefone());
 
         if (validaPaciente.getSexo() == null) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Preencha o campo 'Toma medicação?'.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Preencha o campo 'Toma medicação?'.");
         }
         
         if (validaPaciente.getInfoDeSaude().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Nos informe o que te motivou a conhecer a musicoterapia.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Nos informe o que te motivou a conhecer a musicoterapia.");
         }
         
         paciente.setInfoDeSaude(validaPaciente.getInfoDeSaude());
         
         if (validaPaciente.getEmail().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Campo de email vazio.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Campo de email vazio.");
         }
         
         paciente.setEmail(validaPaciente.getEmail());
         
         if (validaPaciente.getSenha().isEmpty()) {
-            new DlgPopUpCampoVazio(parentCadPaciete, true, "Erro: Defina uma senha para seu login.");
+            new DlgPopUpCampoVazio(new Frame(), true, "Erro: Defina uma senha para seu login.");
         }
         
         paciente.setSenha(validaPaciente.getSenha());

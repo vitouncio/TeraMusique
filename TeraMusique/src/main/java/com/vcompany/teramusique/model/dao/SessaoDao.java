@@ -94,4 +94,25 @@ public class SessaoDao extends Dao<Sessao> {
 
     }
 
+//   public List<Sessao> buscarLstSessoesPorMusicoterapeuta(Musicoterapeuta musicoterapeuta) {
+//        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+//
+//        String jpql = " SELECT s "
+//                + " FROM Sessao s "
+//                + " WHERE s.musicoterapeuta LIKE :musicoterapeuta";
+//        
+//        TypedQuery qry = this.entityManager.createQuery(jpql, Sessao.class);
+//        qry.setParameter("musicoterapeuta", musicoterapeuta);
+//
+//        List<Sessao> lst = qry.getResultList();
+//        this.entityManager.close();
+//
+//        if (lst.isEmpty()) {
+//            return null;
+//        } else {
+//            return (List<Sessao>) lst.get(0);
+//        }
+//
+//    }
+
 }

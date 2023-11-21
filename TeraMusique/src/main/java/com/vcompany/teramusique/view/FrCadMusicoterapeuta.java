@@ -26,24 +26,21 @@ import javax.swing.plaf.FileChooserUI;
  * @author vitor
  */
 public class FrCadMusicoterapeuta extends javax.swing.JFrame {
-    
+
     byte[] certificadosEmBytes;
     java.io.File arquivoSelecionado;
     String caminhoArquivo;
+
     /**
      * Creates new form FrCadMusicoterapeuta
      */
     public FrCadMusicoterapeuta() {
         initComponents();
+        setLocationRelativeTo(null);
+
         this.certificadosEmBytes = new byte[300 * 1024 * 1024];
     }
 
-        
-        
-        
-        
-        
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,17 +53,11 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jFileChooser = new javax.swing.JFileChooser();
         panFormulario = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
         edtIdade = new javax.swing.JTextField();
         edtTelefone = new javax.swing.JTextField();
         edtEspecializacoes = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        edtEmail = new javax.swing.JTextField();
-        edtSenha = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JToggleButton();
         rbtnMasculino = new javax.swing.JRadioButton();
         rbtnFeminino = new javax.swing.JRadioButton();
         rbtnOutro = new javax.swing.JRadioButton();
@@ -75,19 +66,25 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        edtValidacaoDeSenha = new javax.swing.JPasswordField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
+        pnlLogin = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        edtEmail = new javax.swing.JTextField();
+        edtSenha = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        edtValidacaoDeSenha = new javax.swing.JPasswordField();
+        btnCadastrar = new javax.swing.JToggleButton();
 
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Cadastro musicoterapeuta");
+        panFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de musicoterapeuta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
 
         edtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,25 +104,6 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Crie seu login");
-
-        edtEmail.setText("Seu e-mail");
-
-        edtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtSenhaActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Repita sua senha");
-
-        btnCadastrar.setText("Salvar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
         rbtnMasculino.setText("Masculino");
 
         rbtnFeminino.setText("Feminino");
@@ -139,14 +117,6 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
         jLabel8.setText("Idade");
 
         jLabel9.setText("Telefone");
-
-        edtValidacaoDeSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtValidacaoDeSenhaActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Nova senha");
 
         jLabel11.setText("Especialização");
 
@@ -165,6 +135,79 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
         });
 
         jLabel14.setText(".pdf, .png ou .jpeg");
+
+        pnlLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações de login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 14))); // NOI18N
+
+        jLabel3.setText("Crie seu login");
+
+        edtEmail.setText("Seu e-mail");
+
+        edtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtSenhaActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Nova senha");
+
+        jLabel4.setText("Repita sua senha");
+
+        edtValidacaoDeSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtValidacaoDeSenhaActionPerformed(evt);
+            }
+        });
+
+        btnCadastrar.setText("Salvar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
+        pnlLogin.setLayout(pnlLoginLayout);
+        pnlLoginLayout.setHorizontalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLoginLayout.createSequentialGroup()
+                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlLoginLayout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(btnCadastrar))
+                    .addGroup(pnlLoginLayout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(jLabel3)))
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+        pnlLoginLayout.setVerticalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCadastrar)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
         panFormulario.setLayout(panFormularioLayout);
@@ -191,34 +234,10 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
                             .addComponent(rbtnFeminino, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(btnCadastrar))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel7))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(jLabel3))
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel11))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtEspecializacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel12))
@@ -231,21 +250,26 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtEspecializacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panFormularioLayout.createSequentialGroup()
                     .addGap(6, 6, 6)
                     .addComponent(jLabel2)
-                    .addContainerGap(1014, Short.MAX_VALUE)))
+                    .addContainerGap(617, Short.MAX_VALUE)))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -282,21 +306,9 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
                     .addComponent(jLabel14))
                 .addGap(51, 51, 51)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtValidacaoDeSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnCadastrar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panFormularioLayout.createSequentialGroup()
                     .addGap(189, 189, 189)
@@ -310,8 +322,8 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,26 +377,25 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
         }
 
         File arquivoSelecionado = new File(caminhoArquivo.toString());
-        if(!arquivoSelecionado.exists()){
+        if (!arquivoSelecionado.exists()) {
             DlgPopUpCampoVazio popup = new DlgPopUpCampoVazio(this, true, "O arquivo não existe!");
         }
-        
-        
+
         String senha = edtSenha.getText();
         String senhaValidada = edtValidacaoDeSenha.getText();
-        
-        if(senha.equals(senhaValidada)){
 
-        String idadeString = edtIdade.getText();
-        Integer idade = Integer.parseInt(idadeString);
+        if (senha.equals(senhaValidada)) {
 
-        MusicoterapeutaController pCont = new MusicoterapeutaController();
-        Musicoterapeuta m = new Musicoterapeuta(edtNome.getText(), sexo, idade, edtTelefone.getText(), caminhoArquivo, edtEspecializacoes.getText(), edtEmail.getText(), senhaValidada, 1);
+            String idadeString = edtIdade.getText();
+            Integer idade = Integer.parseInt(idadeString);
 
-        pCont.cadastrarMusicoterapeuta(m);
+            MusicoterapeutaController pCont = new MusicoterapeutaController();
+            Musicoterapeuta m = new Musicoterapeuta(edtNome.getText(), sexo, idade, edtTelefone.getText(), caminhoArquivo, edtEspecializacoes.getText(), edtEmail.getText(), senhaValidada, 1);
 
-        dispose();
-        
+            pCont.cadastrarMusicoterapeuta(m);
+
+            dispose();
+
         } else {
             new DlgPopUpCampoVazio(this, true, "Informe a mesma senha no campo de validação.");
         }
@@ -409,22 +420,22 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                fileChooser.setAcceptAllFileFilterUsed(false);
-                
-                int result = fileChooser.showOpenDialog(FrCadMusicoterapeuta.this);
-                
-                if (result == jFileChooser.APPROVE_OPTION){
-                    this.arquivoSelecionado = fileChooser.getSelectedFile();
-                    
-                    this.caminhoArquivo = arquivoSelecionado.getAbsolutePath();
-                    try{
-                        this.certificadosEmBytes = Files.readAllBytes(arquivoSelecionado.toPath());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }                    
-                    
-                }
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+
+        int result = fileChooser.showOpenDialog(FrCadMusicoterapeuta.this);
+
+        if (result == jFileChooser.APPROVE_OPTION) {
+            this.arquivoSelecionado = fileChooser.getSelectedFile();
+
+            this.caminhoArquivo = arquivoSelecionado.getAbsolutePath();
+            try {
+                this.certificadosEmBytes = Files.readAllBytes(arquivoSelecionado.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -442,7 +453,6 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
     private javax.swing.JPasswordField edtValidacaoDeSenha;
     private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -458,6 +468,7 @@ public class FrCadMusicoterapeuta extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panFormulario;
+    private javax.swing.JPanel pnlLogin;
     private javax.swing.JRadioButton rbtnFeminino;
     private javax.swing.JRadioButton rbtnMasculino;
     private javax.swing.JRadioButton rbtnOutro;

@@ -8,6 +8,7 @@ import com.vcompany.teramusique.connection.DatabaseJPA;
 import com.vcompany.teramusique.controller.tableModel.TMCadMusicoterapeuta;
 import com.vcompany.teramusique.controller.tableModel.TMCadMusicoterapeuta;
 import com.vcompany.teramusique.controller.tableModel.TMCadMusicoterapeuta;
+import com.vcompany.teramusique.controller.tableModel.TMCadSessao;
 import com.vcompany.teramusique.exceptions.MusicoterapeutaException;
 import com.vcompany.teramusique.model.Musicoterapeuta;
 import com.vcompany.teramusique.model.Sessao;
@@ -77,7 +78,7 @@ public class MusicoterapeutaController {
     }
     
     public void atualizarTabelaSessaoMusicoterapeuta(JTable grd, List<Sessao> lst){
-        TMCadMusicoterapeuta tableModel = new TMCadMusicoterapeuta(lst);
+        TMCadSessao tableModel = new TMCadSessao(lst);
         grd.setModel(tableModel);
     }
 

@@ -9,7 +9,11 @@ import com.vcompany.teramusique.controller.MusicoterapeutaController;
 import com.vcompany.teramusique.exceptions.MusicaException;
 import com.vcompany.teramusique.model.Musica;
 import com.vcompany.teramusique.model.Sessao;
+import java.awt.Component;
+import java.awt.Container;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import org.hibernate.engine.transaction.jta.platform.internal.JOTMJtaPlatform;
 
 /**
@@ -21,7 +25,7 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
     /**
      * Creates new form DlgSelecaoMusicaParaSessao
      */
-    Sessao sessao;
+    Sessao sessaoSendoCadastrada;
     Musica musicaEscolhida;
     MusicaController mCont;
 
@@ -29,14 +33,15 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
 
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
 
         this.mCont = new MusicaController();
         this.musicaEscolhida = new Musica();
-        this.sessao = sessao;
+        this.sessaoSendoCadastrada = sessao;
 
         this.mCont.atualizarTabela(grdMusicas);
 
-        this.habilitarCampos(false);
+        this.habilitarCampos(true);
         this.limparCampos();
 
     }
@@ -45,17 +50,17 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
         for (int i = 0; i < abaMusicas.getComponents().length; i++) {
             abaMusicas.getComponent(i).setEnabled(flag);
         }
-        btnNovo.setEnabled(flag);
-        btnEditar.setEnabled(flag);
-        btnExcluir.setEnabled(flag);
-        btnCancelar.setEnabled(flag);
+        btnNovo.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnCancelar.setEnabled(true);
 
-        edtTitulo.setEnabled(false);
-        edtDuracao.setEnabled(false);
-        edtAlbum.setEnabled(false);
-        edtArtista.setEnabled(false);
-        edtGenero.setEnabled(false);
-        edtFinalidadeNaSessao.setEnabled(false);
+        edtTitulo.setEnabled(flag);
+        edtDuracao.setEnabled(flag);
+        edtAlbum.setEnabled(flag);
+        edtArtista.setEnabled(flag);
+        edtGenero.setEnabled(flag);
+        edtFinalidadeNaSessao.setEnabled(flag);
 
     }
 
@@ -79,6 +84,10 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
     private void initComponents() {
 
         tbdPnlMusicas = new javax.swing.JTabbedPane();
+        abaTodasAsMusicas = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        grdMusicas = new javax.swing.JTable();
+        btnAdicionar = new javax.swing.JButton();
         abaMusicas = new javax.swing.JPanel();
         pnlBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
@@ -98,12 +107,67 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         edtFinalidadeNaSessao = new javax.swing.JTextField();
-        abaTodasAsMusicas = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grdMusicas = new javax.swing.JTable();
-        btnAdicionar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        abaTodasAsMusicas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar músicas para sessão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 1, 18))); // NOI18N
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
+        grdMusicas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        grdMusicas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdMusicasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(grdMusicas);
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout abaTodasAsMusicasLayout = new javax.swing.GroupLayout(abaTodasAsMusicas);
+        abaTodasAsMusicas.setLayout(abaTodasAsMusicasLayout);
+        abaTodasAsMusicasLayout.setHorizontalGroup(
+            abaTodasAsMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(btnAdicionar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        abaTodasAsMusicasLayout.setVerticalGroup(
+            abaTodasAsMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdicionar)
+                .addGap(20, 20, 20))
+        );
+
+        tbdPnlMusicas.addTab("Menu músicas", abaTodasAsMusicas);
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -169,40 +233,50 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
 
         edtFinalidadeNaSessao.setText("jTextField1");
 
+        jLabel7.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
+        jLabel7.setText("Cadastrar música");
+
         javax.swing.GroupLayout abaMusicasLayout = new javax.swing.GroupLayout(abaMusicas);
         abaMusicas.setLayout(abaMusicasLayout);
         abaMusicasLayout.setHorizontalGroup(
             abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaMusicasLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(edtFinalidadeNaSessao)
-                    .addComponent(jLabel2)
-                    .addGroup(abaMusicasLayout.createSequentialGroup()
-                        .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(edtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(edtArtista, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(edtGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel1))
-                        .addGap(43, 43, 43)
-                        .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(edtAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaMusicasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
+            .addGroup(abaMusicasLayout.createSequentialGroup()
+                .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(abaMusicasLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(edtFinalidadeNaSessao)
+                            .addComponent(jLabel2)
+                            .addGroup(abaMusicasLayout.createSequentialGroup()
+                                .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(edtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(edtArtista, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(edtGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel1))
+                                .addGap(43, 43, 43)
+                                .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
+                                    .addComponent(edtAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(abaMusicasLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jLabel7)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         abaMusicasLayout.setVerticalGroup(
             abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaMusicasLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel7)
+                .addGap(28, 28, 28)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(abaMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,66 +304,10 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtFinalidadeNaSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-
-        tbdPnlMusicas.addTab("Adicionar Musica", abaMusicas);
-
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseClicked(evt);
-            }
-        });
-
-        grdMusicas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdMusicas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdMusicasMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(grdMusicas);
-
-        btnAdicionar.setText("Adicionar");
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout abaTodasAsMusicasLayout = new javax.swing.GroupLayout(abaTodasAsMusicas);
-        abaTodasAsMusicas.setLayout(abaTodasAsMusicasLayout);
-        abaTodasAsMusicasLayout.setHorizontalGroup(
-            abaTodasAsMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(btnAdicionar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        abaTodasAsMusicasLayout.setVerticalGroup(
-            abaTodasAsMusicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaTodasAsMusicasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdicionar)
-                .addContainerGap())
-        );
 
-        tbdPnlMusicas.addTab("Selecionar musica", abaTodasAsMusicas);
+        tbdPnlMusicas.addTab("Adicionar música", abaMusicas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,15 +315,15 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbdPnlMusicas)
-                .addContainerGap())
+                .addComponent(tbdPnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tbdPnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tbdPnlMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -315,6 +333,9 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.habilitarCampos(true);
         this.limparCampos();
+
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
 
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -329,6 +350,8 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
+        musicaEscolhida = (Musica) this.getObjetoSelecionadoNaGrid();
+
         if (musicaEscolhida == null) {
             int response = JOptionPane.showConfirmDialog(null,
                     "Nenhum item foi escolhido. Deseja continuar?",
@@ -336,18 +359,34 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
-                tbdPnlMusicas.setSelectedIndex(0);
-            } else {
-                if (sessao.getLstMusicas().contains(musicaEscolhida)) {
-                    JOptionPane.showMessageDialog(null, "Esta musica já será reproduzida na sessão.");
-                } else {
-                    this.sessao.getLstMusicas().add(musicaEscolhida);
-                    tbdPnlMusicas.setSelectedIndex(0);
+                dispose();
+            }
+        } else if (sessaoSendoCadastrada.getLstMusicas().contains(musicaEscolhida)) {
+            JOptionPane.showMessageDialog(null, "Esta musica já será reproduzida na sessão.");
+        } else {
+            this.sessaoSendoCadastrada.getLstMusicas().add(musicaEscolhida);
+            
+            mCont.atualizarTabela(grdMusicas);
+            
+            JOptionPane.showMessageDialog(null, "Musica adicionada!");
+            // tbdPnlMusicas.setSelectedIndex(0);
+            dispose();
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    private JTable encontrarTabelaRecursivamente(Container container) {
+        for (Component componente : container.getComponents()) {
+            if (componente instanceof JTable) {
+                return (JTable) componente;
+            } else if (componente instanceof Container) {
+                JTable tabelaEncontrada = encontrarTabelaRecursivamente((Container) componente);
+                if (tabelaEncontrada != null) {
+                    return tabelaEncontrada;
                 }
             }
         }
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+        return null;
+    }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
@@ -355,11 +394,34 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
 
             Musica novaMusica = new Musica(edtTitulo.getText(), edtArtista.getText(), edtAlbum.getText(), edtGenero.getText(), edtDuracao.getText(), edtFinalidadeNaSessao.getText());
             mCont.cadastrarMusica(novaMusica);
-            
-            
 
-            this.habilitarCampos(true);
+            this.habilitarCampos(false);
             this.limparCampos();
+
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+            int indexAbaTodasAsMusicas = tbdPnlMusicas.indexOfTab("Selecionar musica");
+
+            // Verificando se a aba foi encontrada
+            if (tbdPnlMusicas.indexOfTab("Selecionar musica") != -1) {
+                // Obtendo o componente da aba "Todas as Músicas"
+                Component componentAbaTodasAsMusicas = tbdPnlMusicas.getComponentAt(indexAbaTodasAsMusicas);
+
+                // Verificando se o componente é um JPanel (ou qualquer outro contêiner)
+                if (componentAbaTodasAsMusicas instanceof JPanel) {
+                    JPanel painelTodasAsMusicas = (JPanel) componentAbaTodasAsMusicas;
+
+                    // Agora você pode acessar a tabela dentro do JPanel "Todas as Músicas" e atualizá-la
+                    JTable grdTodasAsMusicas = encontrarTabelaRecursivamente(painelTodasAsMusicas);
+
+                    // Verificando se a tabela foi encontrada
+                    if (grdTodasAsMusicas != null) {
+                        // Atualizando a tabela
+                        mCont.atualizarTabela(grdTodasAsMusicas);
+                    }
+                }
+            }
+
         } catch (MusicaException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -374,8 +436,8 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+        tbdPnlMusicas.setSelectedComponent(abaTodasAsMusicas);
 
-        tbdPnlMusicas.setSelectedIndex(1);
         Musica musicaExcluida = (Musica) this.getObjetoSelecionadoNaGrid();
 
         if (musicaExcluida == null)
@@ -385,12 +447,12 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o musica  \n("
                     + musicaExcluida.getTitulo() + ", de: "
-                    + musicaExcluida.getArtista()+ ") ?",
+                    + musicaExcluida.getArtista() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
-                        tbdPnlMusicas.setSelectedIndex(1);
+                tbdPnlMusicas.setSelectedIndex(1);
                 try {
                     mCont.excluirMusica(musicaExcluida);
 
@@ -406,24 +468,31 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         Musica musicaEditando = (Musica) this.getObjetoSelecionadoNaGrid();
+        tbdPnlMusicas.setSelectedComponent(abaTodasAsMusicas);
 
-        if (musicaEditando == null)
+        if (musicaEditando == null) {
             JOptionPane.showMessageDialog(this, "Primeiro, selecione uma musica na tabela.");
-        else {
+        } else {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(musicaEditando);
         }
-             
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
+        this.musicaEscolhida = (Musica) this.getObjetoSelecionadoNaGrid();
+
+        if (musicaEscolhida == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione uma musica na tabela.");
+        }
+
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void grdMusicasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdMusicasMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             btnEditarActionPerformed(null);
         }
     }//GEN-LAST:event_grdMusicasMouseClicked
@@ -440,7 +509,6 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel abaMusicas;
@@ -464,6 +532,7 @@ public class DlgSelecaoMusicaParaSessao extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlBotoes;
     private javax.swing.JTabbedPane tbdPnlMusicas;

@@ -1,5 +1,6 @@
 package com.vcompany.teramusique.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -29,23 +30,19 @@ import lombok.EqualsAndHashCode;
 public class Paciente extends Pessoa {
 
     private String infoDeSaude;
-    private Boolean tomaMedicacao;
+    private String tomaMedicacao;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Paciente_Sessao",
-            joinColumns  = {@JoinColumn(name = "paciente_id")},
-            inverseJoinColumns = {@JoinColumn (name = "sessao_id")}
-    )
+    @ManyToMany(mappedBy = "lstPacientes")
             private List<Sessao> lstSessoes;
 
     public Paciente() {
         super();
         this.infoDeSaude = "";
-        this.tomaMedicacao = false;
+        this.tomaMedicacao = "";
+        
     }
 
-    public Paciente(String nome, String sexo, Integer idade, String telefone, String infoDeSaude, Boolean tomaMedicacao, String email, String senha, Integer nivelAcesso) {
+    public Paciente(String nome, String sexo, Integer idade, String telefone, String infoDeSaude, String tomaMedicacao, String email, String senha, Integer nivelAcesso) {
         super(nome, sexo, idade, telefone, email, senha, nivelAcesso);
         this.infoDeSaude = infoDeSaude;
         this.tomaMedicacao = tomaMedicacao;
@@ -81,14 +78,14 @@ public class Paciente extends Pessoa {
     /**
      * @return the tomaMedicacao
      */
-    public Boolean getTomaMedicacao() {
+    public String getTomaMedicacao() {
         return tomaMedicacao;
     }
 
     /**
      * @param tomaMedicacao the tomaMedicacao to set
      */
-    public void setTomaMedicacao(Boolean tomaMedicacao) {
+    public void setTomaMedicacao(String tomaMedicacao) {
         this.tomaMedicacao = tomaMedicacao;
     }
     

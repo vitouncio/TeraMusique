@@ -37,10 +37,11 @@ public class TMCadMusicoterapeuta extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {               
         Musicoterapeuta aux = new Musicoterapeuta();
+        
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (Musicoterapeuta) lista.get(rowIndex);
+             aux = (Musicoterapeuta) lista.get(rowIndex);
 
             //verifica qual valor deve ser retornado
             switch (columnIndex) {

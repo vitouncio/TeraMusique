@@ -31,8 +31,7 @@ public class Pessoa {
     
 
     public Pessoa() {
-        this.id = 0;
-        this.nome = "gustavo";
+        this.nome = "";
         this.sexo = "";
         this.idade = 0;
         this.telefone = "";

@@ -1,5 +1,6 @@
 package com.vcompany.teramusique.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,16 +38,6 @@ public class Musica {
     private String finalidadeNaSessao;
 
     @ManyToMany(mappedBy = "lstMusicas")
-    private List<Instrumento> lstInstrumentos;
-
-    @ManyToMany
-    @JoinTable(
-            name = "Musica_Sessao",
-            joinColumns = {
-                @JoinColumn(name = "musica_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "sessao_id")}
-    )
     private List<Sessao> lstSessoes;
 
     public Musica() {
@@ -56,6 +47,8 @@ public class Musica {
         this.genero = "";
         this.duracao = "";
         this.finalidadeNaSessao = "";
+
+
     }
 
     public Musica(String titulo, String artista, String album, String genero, String duracao, String finalidadeNaSessao) {

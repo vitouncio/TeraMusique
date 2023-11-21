@@ -55,19 +55,6 @@ public class ValidateMusica {
 
         m.setFinalidadeNaSessao(validaMusica.getFinalidadeNaSessao());
         
-         if (validaMusica.getLstInstrumentos().isEmpty()) {
-            throw new MusicaException("Error - Campo vazio: 'Lista de instrumentos'. ");
-        }
-
-        m.setLstInstrumentos(validaMusica.getLstInstrumentos());
-        
-        
-         if (validaMusica.getLstSessoes().isEmpty()) {
-            throw new MusicaException("Error - Campo vazio: 'Lista de sessoes'. ");
-        }
-
-        m.setLstSessoes(validaMusica.getLstSessoes());
-        
         return m;
     }
     
